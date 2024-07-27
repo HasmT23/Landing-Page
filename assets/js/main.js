@@ -187,5 +187,32 @@
 				}
 			});
 
-})(jQuery);
+	// Slideshow functionality
+	(function() {
+		let slideIndex = 1;
+		const slides = document.getElementsByClassName("mySlides");
+		const dots = document.getElementsByClassName("dot");
 
+		function showSlides(n) {
+			slideIndex = n > slides.length ? 1 : n < 1 ? slides.length : n;
+			
+			Array.from(slides).forEach(slide => slide.style.display = "none");
+			Array.from(dots).forEach(dot => dot.classList.remove("active"));
+			
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].classList.add("active");
+		}
+
+		window.plusSlides = function(n) {
+			showSlides(slideIndex += n);
+		};
+
+		window.currentSlide = function(n) {
+			showSlides(slideIndex = n);
+		};
+
+		// Initialize the slideshow
+		showSlides(slideIndex);
+	})();
+
+})(jQuery);
